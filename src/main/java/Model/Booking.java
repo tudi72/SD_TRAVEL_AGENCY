@@ -3,8 +3,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "booking")
-@NamedNativeQuery(name="Booking.SelectByUser",query = "SELECT * FROM booking WHERE user_id = ?",resultClass = Booking.class)
-@NamedNativeQuery(name="Booking.SelectByVacation",query = "SELECT * FROM booking WHERE vacation_id = ?",resultClass = Booking.class)
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Booking.SelectByUser", query = "SELECT * FROM booking WHERE user_id = ?", resultClass = Booking.class),
+        @NamedNativeQuery(name = "Booking.SelectByVacation", query = "SELECT * FROM booking WHERE vacation_id = ?", resultClass = Booking.class)
+})
 public class Booking {
 
     @Id

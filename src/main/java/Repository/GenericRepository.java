@@ -1,7 +1,6 @@
 package Repository;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,6 @@ public class GenericRepository<T> implements GenericInterface<T>{
      * insert object of type T into database
      * @param obj
      */
-    @Transactional
     public void insert(T obj) {
       this.persist(obj);
     }
@@ -75,7 +73,6 @@ public class GenericRepository<T> implements GenericInterface<T>{
      * @param param the parameter for the query
      * @return List of objects resulted from query
      */
-    @Transactional
     public ArrayList<T> executeQueryAndGetList(String query, String[] param){
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         manager.getTransaction().begin();
@@ -91,7 +88,6 @@ public class GenericRepository<T> implements GenericInterface<T>{
         manager.close();
         return list;
     }
-    @Transactional
     public void executeQuery(String query, String[] param){
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         manager.getTransaction().begin();
@@ -113,7 +109,6 @@ public class GenericRepository<T> implements GenericInterface<T>{
      * @param param
      * @return one single value
      */
-    @Transactional
     public T executeQueryAndGetValue(String query, String[] param){
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         manager.getTransaction().begin();
@@ -141,7 +136,6 @@ public class GenericRepository<T> implements GenericInterface<T>{
      * @param obj the object to be updated
      * @return
      */
-    @Transactional
     public boolean update(T obj){
         String queryText = "UPDATE " + type.getSimpleName() + " SET ";
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();

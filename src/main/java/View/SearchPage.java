@@ -1,7 +1,5 @@
 package View;
 
-import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
-
 import javax.swing.*;
 import java.awt.*;
 

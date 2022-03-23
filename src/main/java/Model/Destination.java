@@ -6,10 +6,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "destination")
-@NamedNativeQuery(name = "Destination.Select",query="SELECT * FROM destination where country = ? and location = ?",resultClass = Destination.class)
-@NamedNativeQuery(name = "Destination.SelectAll",query = "SELECT * FROM destination",resultClass = Destination.class)
-@NamedNativeQuery(name = "Destination.SelectById",query = "SELECT * FROM destination where id = ?",resultClass = Destination.class)
-public class Destination {
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Destination.Select", query = "SELECT * FROM destination where country = ? and location = ?", resultClass = Destination.class),
+        @NamedNativeQuery(name = "Destination.SelectAll", query = "SELECT * FROM destination", resultClass = Destination.class),
+        @NamedNativeQuery(name = "Destination.SelectById", query = "SELECT * FROM destination where id = ?", resultClass = Destination.class)
+
+})
+    public class Destination {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

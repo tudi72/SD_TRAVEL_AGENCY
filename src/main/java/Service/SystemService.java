@@ -127,7 +127,6 @@ public class SystemService {
         params[0] = String.valueOf(vacation.getId());
         ArrayList<Booking> bookings = repository.executeQueryAndGetList("Booking.SelectByVacation",params);
         try{
-            bookings.stream().forEach(x -> repository.delete(x));
             return true;
         }
         catch (Exception e){

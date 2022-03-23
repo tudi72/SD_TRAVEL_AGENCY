@@ -9,17 +9,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "vacation")
-@NamedNativeQuery(name = "Vacation.SelectAll", query = "SELECT * FROM vacation", resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.SelectById", query = "SELECT * FROM vacation where id = ?", resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.SelectByAvailability", query = "SELECT * FROM vacation WHERE status <> 2 and capacity > 0", resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.SelectByDestination",query =
-"SELECT vacation.* FROM vacation join destination WHERE destination.country = ? or destination.location = ? and status <> 2",resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.SelectByPrice",query = "SELECT vacation.* FROM vacation WHERE price < ? and status <> 2",resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.SelectByPeriod",query = "SELECT vacation.* FROM vacation WHERE startDate = ? and endDate = ? and status <> 2",resultClass = Vacation.class)
-@NamedNativeQuery(name = "Vacation.UpdateCapacity",query = "Update vacation set capacity = ? where id = ?")
-@NamedNativeQuery(name = "Vacation.UpdateStatus",query = "Update vacation set status = ? where id = ?")
-@NamedNativeQuery(name = "Vacation.SelectByDestId",query = "SELECT* FROM vacation where destination_id = ?",resultClass = Vacation.class)
-
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "Vacation.SelectAll", query = "SELECT * FROM vacation", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.SelectById", query = "SELECT * FROM vacation where id = ?", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.SelectByAvailability", query = "SELECT * FROM vacation WHERE status <> 2 and capacity > 0", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.SelectByDestination", query =
+                "SELECT vacation.* FROM vacation join destination WHERE destination.country = ? or destination.location = ? and status <> 2", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.SelectByPrice", query = "SELECT vacation.* FROM vacation WHERE price < ? and status <> 2", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.SelectByPeriod", query = "SELECT vacation.* FROM vacation WHERE startDate = ? and endDate = ? and status <> 2", resultClass = Vacation.class),
+        @NamedNativeQuery(name = "Vacation.UpdateCapacity", query = "Update vacation set capacity = ? where id = ?"),
+        @NamedNativeQuery(name = "Vacation.UpdateStatus", query = "Update vacation set status = ? where id = ?"),
+        @NamedNativeQuery(name = "Vacation.SelectByDestId", query = "SELECT* FROM vacation where destination_id = ?", resultClass = Vacation.class)
+})
 public class Vacation {
 
     public int getCapacity() {
@@ -121,7 +122,6 @@ public class Vacation {
         return destination_id;
     }
 
-    @Transactional
     public void setDestination(Destination destination) {
         this.destination_id = destination;
     }
