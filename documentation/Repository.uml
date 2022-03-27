@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>demo.Repository</OriginalElement>
+  <nodes>
+    <node x="348.0" y="0.0">demo.Repository.GenericInterface</node>
+    <node x="0.0" y="160.0">demo.Repository.DestinationRepository</node>
+    <node x="652.0" y="160.0">demo.Repository.UserRepository</node>
+    <node x="236.0" y="160.0">demo.Repository.VacationRepository</node>
+    <node x="344.0" y="80.0">demo.Repository.GenericRepository</node>
+    <node x="448.0" y="160.0">demo.Repository.BookingRepository</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="demo.Repository.GenericRepository" target="demo.Repository.GenericInterface">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="demo.Repository.VacationRepository" target="demo.Repository.GenericRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="332.0" y="140.0" />
+      <point x="413.0" y="140.0" />
+      <point x="-23.0" y="15.0" />
+    </edge>
+    <edge source="demo.Repository.BookingRepository" target="demo.Repository.GenericRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="540.0" y="140.0" />
+      <point x="459.0" y="140.0" />
+      <point x="23.0" y="15.0" />
+    </edge>
+    <edge source="demo.Repository.UserRepository" target="demo.Repository.GenericRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="732.0" y="130.0" />
+      <point x="505.0" y="130.0" />
+      <point x="69.0" y="15.0" />
+    </edge>
+    <edge source="demo.Repository.DestinationRepository" target="demo.Repository.GenericRepository">
+      <point x="0.0" y="-15.0" />
+      <point x="108.0" y="130.0" />
+      <point x="367.0" y="130.0" />
+      <point x="-69.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="504.0" y="95.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
