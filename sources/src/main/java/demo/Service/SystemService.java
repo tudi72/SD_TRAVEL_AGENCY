@@ -7,6 +7,7 @@ import demo.Model.Destination;
 import demo.Model.Mapper.BookingMapper;
 import demo.Model.Mapper.VacationMapper;
 import demo.Model.Vacation;
+import demo.Repository.BookingRepository;
 import demo.Repository.DestinationRepository;
 import demo.Repository.GenericInterface;
 import demo.Repository.VacationRepository;
@@ -152,9 +153,15 @@ public class SystemService {
         repository = new VacationRepository();
         String[] params = new String[1];
         params[0] = String.valueOf(d.getId());
-        ArrayList<Vacation> vacations = repository.executeQueryAndGetList("Vacation.SelectByDestId",params);
+        ArrayList<Vacation> vacations = (new VacationRepository()).executeQueryAndGetList("Vacation.SelectByDestId",params);
         try{
-            vacations.stream().forEach(x -> repository.delete(x));
+            for(Vacation v: vacations){
+                String[] params2 = new String[1];
+                params2[0] = String.valueOf(v.getId());
+                ArrayList<Booking> bookings = (new BookingRepository()).executeQueryAndGetList("Booking.SelectByVacation",params2);
+                bookings.stream().forEach(x -> ( new BookingRepository()).delete(x));
+                (new VacationRepository()).delete(v);
+            }
             return true;
         }
         catch (Exception e){
@@ -186,7 +193,10 @@ public class SystemService {
             ArrayList<VacationDTO> DTOs = new ArrayList<>();
             for(Vacation raw: rawVacations){
                 VacationDTO DTO = VacationMapper.convertToDTO(raw);
+                DTO.setCity(raw.getDestination().getLocation());
+                DTO.setDestination(raw.getDestination().getCountry());
                 DTOs.add(DTO);
+
             }
             return DTOs;
             //return (ArrayList<VacationDTO>)rawVacations.stream().map(x -> VacationMapper.convertToDTO(x)).collect(Collectors.toList());

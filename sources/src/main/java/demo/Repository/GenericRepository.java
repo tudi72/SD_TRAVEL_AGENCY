@@ -1,6 +1,7 @@
 package demo.Repository;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,7 @@ public class GenericRepository<T> implements GenericInterface<T>{
      * insert object of type T into database
      * @param obj
      */
+    @Transactional
     public void insert(T obj) {
       this.persist(obj);
     }
@@ -205,12 +207,14 @@ public class GenericRepository<T> implements GenericInterface<T>{
      *  for a given object
      * @param obj of type T
      */
+    @Transactional
     public void persist(T obj){
         EntityManager manager = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction et = null;
         try{
             et = manager.getTransaction();
             et.begin();
+            manager.detach(obj);
             manager.persist(obj);
             et.commit();
 

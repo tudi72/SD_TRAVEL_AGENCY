@@ -158,6 +158,7 @@ public class AgencyController {
         @Override
         public void actionPerformed(ActionEvent e) {
             ArrayList<Vacation> rawVacations = agencyService.viewVacation();
+
             ArrayList<VacationDTO> vacationDTOS = systemService.mapRawToVacationTO(rawVacations);
             agencyPage.setVacationTable(vacationDTOGenerator.generateTable(vacationDTOS));
         }
@@ -171,10 +172,15 @@ public class AgencyController {
         public void actionPerformed(ActionEvent e) {
 
             ArrayList<Destination> rawDestinations = systemService.selectDestination();
-            JTable table = (new DestinationGenerator()).generateTable(rawDestinations);
-            agencyPage.setDestinationTableForDelete(table);
-            agencyPage.setDestinationTableAction(new DeleteDestinationTableAction());
+            if(rawDestinations == null || rawDestinations.size() == 0){
+                agencyPage.inputError("cannot show any destination");
+            }
+            else{
 
+                JTable table = (new DestinationGenerator()).generateTable(rawDestinations);
+                agencyPage.setDestinationTableForDelete(table);
+                agencyPage.setDestinationTableAction(new DeleteDestinationTableAction());
+            }
         }
     }
 
@@ -211,9 +217,16 @@ public class AgencyController {
     private class DeleteVacationAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            agencyPage.setVacationTableForDelete((new VacationGenerator()).generateTable(agencyService.viewVacation()));
-            agencyPage.setVacationTableAction(new DeleteVacationTableAction());
+            ArrayList<Vacation> vacations = agencyService.viewVacation();
+            if(vacations == null || vacations.size() == 0){
+                agencyPage.inputError("Cannot show any vacation ");
+            }
+            else{
 
+                JTable table = (new VacationGenerator()).generateTable(vacations);
+                agencyPage.setVacationTableForDelete(table);
+                agencyPage.setVacationTableAction(new DeleteVacationTableAction());
+            }
         }
     }
 
@@ -299,9 +312,14 @@ public class AgencyController {
         @Override
         public void actionPerformed(ActionEvent e) {
             ArrayList<Vacation> rawVacations = agencyService.viewVacation();
-            JTable table = (new VacationGenerator()).generateTable(rawVacations);
-            agencyPage.setVacationToEditTable(table);
-            agencyPage.setEditTableAction(new MiddleEditVacationAction());
+            if(rawVacations == null || rawVacations.size() == 0){
+                agencyPage.inputError("Cannot show any vacation");
+            }
+            else{
+                JTable table = (new VacationGenerator()).generateTable(rawVacations);
+                agencyPage.setVacationToEditTable(table);
+                agencyPage.setEditTableAction(new MiddleEditVacationAction());
+            }
         }
     }
 
